@@ -40,6 +40,7 @@ package kh.com.csx.service.impl;
                 Menu menu = menuRepository.findById(Math.toIntExact(orderMenuRequest.getMenuId()))
                         .orElseThrow(() -> new RuntimeException("Menu not found"));
                 OrderMenu orderMenu = new OrderMenu();
+                orderMenu.setOrder(order);
                 orderMenu.setMenu(menu);
                 orderMenu.setQuantity(orderMenuRequest.getQuantity());
                 orderMenu.setPrice(menu.getPrice()); // Convert double to BigDecimal

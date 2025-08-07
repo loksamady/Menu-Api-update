@@ -1,21 +1,20 @@
-package kh.com.csx.dto;
+// src/main/java/kh/com/csx/dto/OrderRequest.java
+    package kh.com.csx.dto;
 
-import lombok.*;
+    import lombok.*;
+    import java.math.BigDecimal;
+    import java.util.Date;
+    import java.util.List;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Builder
-@Getter
-@Setter
-public class OrderRequest {
-    private Long customerId;
-    List<OrderMenuRequest> orderMenuRequests;
-    private BigDecimal totalPrice;
-    private Date createdAt;
-    private String note;
-}
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public class OrderRequest {
+        private Long customerId;
+        private String customerName;
+        private List<OrderMenuRequest> orderMenuRequests;
+        private BigDecimal totalPrice;
+        private Date createdAt;
+        private String note;
+    }

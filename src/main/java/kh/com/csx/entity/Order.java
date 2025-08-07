@@ -1,6 +1,7 @@
 package kh.com.csx.entity;
 
 import jakarta.persistence.*;
+import kh.com.csx.entity.enums.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,9 +21,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Use
     private Long id;
     private String total_amount;
-    private String status; // e.g., "pending", "completed", "cancelled"
-    private String payment_method; // e.g., "cash", "credit_card", "mobile_payment"
+    private PaymentStatus paymentStatus; // Enum for payment status
     private BigDecimal totalPrice;
+    private String customerPhone; // Customer's phone number
+    private String customerAddress; // Customer's address
     private Date created_at; // Timestamp for when the order was created
     private Date updated_at; // Timestamp for when the order was last updated
     @ManyToOne

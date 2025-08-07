@@ -2,6 +2,8 @@ package kh.com.csx.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -9,11 +11,9 @@ import lombok.*;
 @Getter
 @Setter
 public class OrderMenuResponse {
-    private Long id;
-    private String name;
-    private String description;
-    private String imageUrl;
-    private Integer price;
+    private Integer menuId;
+    private String menuName;
     private Integer quantity;
     private Long orderId;
+    private BigDecimal priceAtOrder;
 }

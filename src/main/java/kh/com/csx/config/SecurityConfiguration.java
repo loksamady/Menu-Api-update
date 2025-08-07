@@ -1,6 +1,5 @@
 package kh.com.csx.config;
 
-
 import kh.com.csx.constant.Constant;
 import kh.com.csx.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -39,10 +38,9 @@ public class SecurityConfiguration {
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authenticationProvider(authenticationProvider)
+                // .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .build()
-                ;
+                .build();
     }
 
     @Bean

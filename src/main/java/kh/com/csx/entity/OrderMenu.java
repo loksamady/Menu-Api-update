@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -23,5 +25,5 @@ public class OrderMenu {
     private double price; // Price of the menu item at the time of the order
     private double discount; // Discount applied to the menu item in the order
     private double totalPrice; // Total price for the menu item in the order (quantity * price - discount)
-
+    private BigDecimal priceAtOrder;
 }

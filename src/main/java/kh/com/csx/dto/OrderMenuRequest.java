@@ -2,6 +2,8 @@ package kh.com.csx.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -11,8 +13,6 @@ import lombok.*;
 public class OrderMenuRequest {
     private Long menuId;
     private String menuName;
-    private String menuImage;
     private Integer quantity;
-    private Double price;
-    private String note;
+    private BigDecimal priceAtOrder;
 }
