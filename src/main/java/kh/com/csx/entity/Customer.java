@@ -21,6 +21,7 @@ public class Customer {
 
     private String username;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private String address;
