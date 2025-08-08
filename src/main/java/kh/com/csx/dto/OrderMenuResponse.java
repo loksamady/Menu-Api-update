@@ -15,5 +15,5 @@ public class OrderMenuResponse {
     private String menuName;
     private Integer quantity;
     private Long orderId;
-    private BigDecimal priceAtOrder;
+//    private BigDecimal priceAtOrder;
 }

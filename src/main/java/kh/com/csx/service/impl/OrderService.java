@@ -32,7 +32,9 @@ package kh.com.csx.service.impl;
                     .orElseThrow(() -> new RuntimeException("Customer not found"));
             Order order = new Order();
             order.setCustomer(customer);
-            order.setCreated_at(new Date());
+            order.setCustomerAddress(customer.getAddress());
+            order.setCustomerPhone(customer.getPhoneNumber());
+            order.setCreatedAt(new Date());
 
             BigDecimal totalPrice = BigDecimal.ZERO;
             Set<OrderMenu> orderMenuSet = new HashSet<>();

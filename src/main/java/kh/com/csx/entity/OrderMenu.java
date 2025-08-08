@@ -21,9 +21,18 @@ public class OrderMenu {
     private Long id;
     @ManyToOne Order order;
     @ManyToOne Menu menu;
+
+    @Column(name = "menu_id", insertable = false, updatable = false)
+    private Integer menuId; // Foreign key to Menu entity
+
+    @Column (name = "menu_name")
+    private String menuName; // Name of the menu item
+
     private int quantity; // Quantity of the menu item in the order
     private double price; // Price of the menu item at the time of the order
     private double discount; // Discount applied to the menu item in the order
+
+    @Column (name = "total_price")
     private double totalPrice; // Total price for the menu item in the order (quantity * price - discount)
     private BigDecimal priceAtOrder;
 }

@@ -16,5 +16,4 @@
         private List<OrderMenuRequest> orderMenuRequests;
         private BigDecimal totalPrice;
         private Date createdAt;
-        private String note;
     }

@@ -11,7 +11,7 @@
     @AllArgsConstructor
     @Builder
     public class OrderDetailResponse {
-        private Long id;
+//        private Long id;
         private Long orderId;
         private String customerName;
         private String customerPhone;

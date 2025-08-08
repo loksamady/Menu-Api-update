@@ -21,19 +21,33 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Use
     private Long id;
     private String total_amount;
+
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING) // Store enum as a string in the database
     private PaymentStatus paymentStatus; // Enum for payment status
+
+    @Column(name="total_price")
     private BigDecimal totalPrice;
+
+    @Column(name = "customer_phone")
     private String customerPhone; // Customer's phone number
+
+    @Column(name = "customer_address")
     private String customerAddress; // Customer's address
-    private Date created_at; // Timestamp for when the order was created
-    private Date updated_at; // Timestamp for when the order was last updated
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP) // Store as a timestamp in the database
+    private Date createdAt; // Timestamp for when the order was created
+
+    @Column(name= "updated_at")
+    @Temporal(TemporalType.TIMESTAMP) // Store as a timestamp in the database
+    private Date updatedAt; // Timestamp for when the order was last updated
+
     @ManyToOne
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
 
     // If you have another field mapping the same column, ensure it is properly annotated:
-    @Column(name = "customer_id")
-    private Long customerId;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private java.util.List<OrderMenu> orderMenus; // List of order menu items associated with
 }
