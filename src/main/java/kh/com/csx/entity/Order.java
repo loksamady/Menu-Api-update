@@ -2,15 +2,14 @@ package kh.com.csx.entity;
 
 import jakarta.persistence.*;
 import kh.com.csx.entity.enums.PaymentStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,36 +17,35 @@ import java.util.Date;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Use
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
     private Long id;
-    private String total_amount;
 
-    @Column(name = "payment_status")
-    @Enumerated(EnumType.STRING) // Store enum as a string in the database
-    private PaymentStatus paymentStatus; // Enum for payment status
-
-    @Column(name="total_price")
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
     @Column(name = "customer_phone")
-    private String customerPhone; // Customer's phone number
+    private String customerPhone;
 
     @Column(name = "customer_address")
-    private String customerAddress; // Customer's address
+    private String customerAddress;
 
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP) // Store as a timestamp in the database
-    private Date createdAt; // Timestamp for when the order was created
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
-    @Column(name= "updated_at")
-    @Temporal(TemporalType.TIMESTAMP) // Store as a timestamp in the database
-    private Date updatedAt; // Timestamp for when the order was last updated
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    // If you have another field mapping the same column, ensure it is properly annotated:
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private java.util.List<OrderMenu> orderMenus; // List of order menu items associated with
+    private List<OrderMenu> orderMenus;
 }

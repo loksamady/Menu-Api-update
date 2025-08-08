@@ -1,44 +1,51 @@
 package kh.com.csx.entity;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+    import jakarta.persistence.*;
+    import lombok.*;
 
-import java.util.Date;
+    import java.util.Date;
+    import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table (name = "customers")
-public class Customer {
-    @Id
+    @Table(name = "customers")
+    public class Customer {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", nullable = false, unique = true)
+        private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "username", length = 255, unique = false)
+        private String username;
 
-    private Long id;
+        @Column(name = "phone_number")
+        private String phoneNumber;
 
-    @Column(name = "username", unique = true, nullable = false)
+        @Column(name = "address")
+        private String address;
 
-    private String username;
+        @Column(name = "telegramId")
+        private String telegramId;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
+        @Column(name = "telegramUsername")
+        private String telegramUsername;
 
-    private String address;
+        @Column(name = "created_at")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date createdAt;
 
-    private String telegramId;
+        @Column(name = "updated_at")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date updatedAt;
 
-    private String telegramUsername;
+        @Column(name = "deleted_at")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date deletedAt;
 
-    @Column(name = "created_at")
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    private Date updatedAt;
-
-    @Column(name = "deleted_at")
-    private Date deletedAt;
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private java.util.List<Order> orders; // List of orders associated with the customer
-}
+        @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        private List<Order> orders;
+    }
