@@ -1,5 +1,6 @@
 package kh.com.csx.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,22 +13,25 @@ import java.util.Date;
 @ToString
 public class CustomerRequest {
     private String username; // Unique name for the customer
-    @Column (name = "phone_number")
+    @JsonProperty("phone_number")
     private String phoneNumber;
     private String address;
 
-    @Column (name = "telegram_id")
+    @JsonProperty("telegram_id")
     private String telegramId; // Telegram ID for customer communication
 
-    @Column (name = "telegram_username")
+    @JsonProperty("telegram_username")
     private String telegramUsername; // Telegram username for customer communication
 
-    @Column (name = "created_at")
+    @JsonProperty("profile_picture")
+    private String profilePicture; // Optional field for customer profile picture
+
+    @JsonProperty("created_at")
     private Date createdAt; // Timestamp for when the customer was created
 
-    @Column (name = "updated_at")
+    @JsonProperty("updated_at")
     private Date updatedAt; // Timestamp for when the customer was last updated
 
-    @Column (name = "deleted_at")
+    @JsonProperty("deleted_at")
     private Date deletedAt; // Timestamp for when the customer was deleted, if applicable
 }

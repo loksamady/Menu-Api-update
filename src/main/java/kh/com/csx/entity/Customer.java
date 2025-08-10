@@ -28,11 +28,14 @@ package kh.com.csx.entity;
         @Column(name = "address")
         private String address;
 
-        @Column(name = "telegramId")
+        @Column(name = "telegram_id")
         private String telegramId;
 
-        @Column(name = "telegramUsername")
+        @Column(name = "telegram_username")
         private String telegramUsername;
+
+        @Column(name = "profile_picture",nullable = false)
+        private String profilePicture; // Optional field for customer profile picture
 
         @Column(name = "created_at")
         @Temporal(TemporalType.TIMESTAMP)

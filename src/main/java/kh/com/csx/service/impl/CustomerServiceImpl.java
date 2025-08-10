@@ -29,10 +29,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerResponse update(CustomerRequest customerRequest, Long id) {
-        Optional<Customer> customer = customerRepository.findById(id);
+    public CustomerResponse update(CustomerRequest customerRequest, String phoneNumber) {
+        Optional<Customer> customer = customerRepository.findByPhoneNumber(phoneNumber);
         if (customer.isEmpty()) {
-            log.error("Customer id {} not found", id);
+            log.error("Customer phoneNumber {} not found", phoneNumber);
             return new CustomerResponse();
         }
         Customer customerToUpdate = customer.get();
@@ -41,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerToUpdate.setAddress(customerRequest.getAddress());
         customerToUpdate.setTelegramId(customerRequest.getTelegramId());
         customerToUpdate.setTelegramUsername(customerRequest.getTelegramUsername());
+        customerToUpdate.setProfilePicture(customerRequest.getProfilePicture());
         customerToUpdate.setUpdatedAt(new Date());
 
         customerRepository.saveAndFlush(customerToUpdate);
@@ -84,20 +85,21 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerResponse findById(Long id) {
+    public CustomerResponse findByPhoneNumber(String phoneNumber) {
         CustomerResponse customerResponse = new CustomerResponse();
 
-        Optional<Customer> customer = customerRepository.findById(id);
+        Optional<Customer> customer = customerRepository.findByPhoneNumber(phoneNumber);
         if (customer.isEmpty()) {
-            log.error("Customer with id {} not found", id);
+            log.error("Customer with phone number {} not found", phoneNumber);
             return customerResponse;
-        }else{
-            customerResponse.setId(customer.get().getId());
-            customerResponse.setUsername(customer.get().getUsername());
-            customerResponse.setPhoneNumber(customer.get().getPhoneNumber());
-            customerResponse.setAddress(customer.get().getAddress());
-            customerResponse.setTelegramId(customer.get().getTelegramId());
-            customerResponse.setTelegramUsername(customer.get().getTelegramUsername());
+        } else {
+            Customer foundCustomer = customer.get();
+            customerResponse.setId(foundCustomer.getId());
+            customerResponse.setUsername(foundCustomer.getUsername());
+            customerResponse.setPhoneNumber(foundCustomer.getPhoneNumber());
+            customerResponse.setAddress(foundCustomer.getAddress());
+            customerResponse.setTelegramId(foundCustomer.getTelegramId());
+            customerResponse.setTelegramUsername(foundCustomer.getTelegramUsername());
         }
 
         return customerResponse;
