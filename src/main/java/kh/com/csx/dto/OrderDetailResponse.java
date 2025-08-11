@@ -22,12 +22,9 @@
         @JsonProperty("customer_address")
         private String customerAddress;
 //        private String note;
-        @JsonProperty("total_price")
-        private BigDecimal totalPrice;
+        @JsonProperty("total_amount")
+        private BigDecimal total_amount;
 //        private String status;
-        @JsonProperty("payment_status")
-        private String paymentStatus; // <-- Change type here to String
-
         @JsonProperty("created_at")
         private Date createdAt;
 

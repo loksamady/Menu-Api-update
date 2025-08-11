@@ -44,10 +44,18 @@ package kh.com.csx.service.impl;
                 OrderMenu orderMenu = new OrderMenu();
                 orderMenu.setOrder(order);
                 orderMenu.setMenu(menu);
-                orderMenu.setQuantity(orderMenuRequest.getQuantity());
-                orderMenu.setPrice(menu.getPrice()); // Convert double to BigDecimal
-                totalPrice = totalPrice.add(BigDecimal.valueOf(menu.getPrice())
-                        .multiply(BigDecimal.valueOf(orderMenuRequest.getQuantity())));
+                orderMenu.setQuantity(orderMenuRequest.getQuantity().intValue()); // Convert BigDecimal to int
+                orderMenu.setPrice(BigDecimal.valueOf(menu.getPrice())); // Convert double to BigDecimal
+                orderMenu.setDiscount(BigDecimal.valueOf(menu.getDiscount())); // Assuming Menu has a discount field
+
+                BigDecimal totalMenuPrice = orderMenu.getPrice()
+                        .multiply(BigDecimal.valueOf(orderMenu.getQuantity()))
+                        .subtract(orderMenu.getDiscount());
+                orderMenu.setTotalPrice(BigDecimal.valueOf(totalMenuPrice.doubleValue())); // Set total price for the menu item
+                totalPrice = totalPrice.add(totalMenuPrice); // Accumulate total price
+
+                // Add to Set to avoid duplicates
+
                 orderMenuSet.add(orderMenu);
             }
             order.setOrderMenus(new ArrayList<>(orderMenuSet)); // Convert Set to List

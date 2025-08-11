@@ -11,6 +11,7 @@ import kh.com.csx.service.impl.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,14 +63,17 @@ public class OrderController {
         dto.setCustomerName(order.getCustomer().getUsername());
         dto.setCustomerPhone(order.getCustomer().getPhoneNumber());
         dto.setCustomerAddress(order.getCustomer().getAddress());
-        dto.setTotalPrice(order.getTotalPrice());
+        dto.setTotal_amount(order.getTotalPrice());
+        dto.setUpdatedAt(order.getUpdatedAt());
         dto.setCreatedAt(order.getCreatedAt());
         dto.setOrderMenuRequests(order.getOrderMenus().stream().map(orderMenu -> {
             OrderMenuResponse im = new OrderMenuResponse();
             im.setMenuId(orderMenu.getMenu().getMenuId());
             im.setMenuName(orderMenu.getMenu().getNameKh());
-            im.setQuantity(orderMenu.getQuantity());
-            im.setOrderId(orderMenu.getId());
+            im.setPrice(orderMenu.getPrice());
+            im.setDiscount(orderMenu.getDiscount());
+            im.setQuantity(BigDecimal.valueOf(orderMenu.getQuantity()));
+            im.setTotalPrice(orderMenu.getTotalPrice());
             return im;
         }).toList());
         return dto;

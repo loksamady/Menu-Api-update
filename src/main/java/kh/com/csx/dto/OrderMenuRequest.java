@@ -12,15 +12,20 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class OrderMenuRequest {
-    private Long menuId;
+    private Integer menuId;
 
     @JsonProperty("menu_name")
     private String menuName;
 
     @JsonProperty("quantity")
-    private Integer quantity;
+    private BigDecimal quantity;
 
-    @JsonProperty("order_id")
-    private Long orderId;
+    @JsonProperty("price")
+    private BigDecimal price;
 
+    @JsonProperty("total_price")
+    private BigDecimal totalPrice;
+
+    @JsonProperty("discount")
+    private BigDecimal discount = BigDecimal.ZERO; // Discount applied to the menu item in the
 }
