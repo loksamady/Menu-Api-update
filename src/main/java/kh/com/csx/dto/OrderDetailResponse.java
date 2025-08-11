@@ -1,6 +1,7 @@
 // src/main/java/kh/com/csx/dto/OrderDetailResponse.java
     package kh.com.csx.dto;
 
+    import com.fasterxml.jackson.annotation.JsonProperty;
     import lombok.*;
     import java.math.BigDecimal;
     import java.util.Date;
@@ -13,14 +14,26 @@
     public class OrderDetailResponse {
 //        private Long id;
         private Long orderId;
+
+        @JsonProperty("customer_name")
         private String customerName;
+        @JsonProperty("customer_phone")
         private String customerPhone;
+        @JsonProperty("customer_address")
         private String customerAddress;
 //        private String note;
+        @JsonProperty("total_price")
         private BigDecimal totalPrice;
 //        private String status;
+        @JsonProperty("payment_status")
+        private String paymentStatus; // <-- Change type here to String
+
+        @JsonProperty("created_at")
         private Date createdAt;
-//        private Date updatedAt;
+
+        @JsonProperty("updated_at")
+        private Date updatedAt;
+
         private Long customerId;
         private List<OrderMenuResponse> orderMenuRequests; // <-- Change type here
     }

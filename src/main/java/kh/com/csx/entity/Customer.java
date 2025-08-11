@@ -1,10 +1,9 @@
 package kh.com.csx.entity;
 
-    import jakarta.persistence.*;
-    import lombok.*;
+import jakarta.persistence.*;
+import lombok.*;
 
-    import java.util.Date;
-    import java.util.List;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -12,43 +11,40 @@ package kh.com.csx.entity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-    @Table(name = "customers")
-    public class Customer {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", nullable = false, unique = true)
-        private Long id;
+@Table(name = "customers")
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
 
-        @Column(name = "username", length = 255, unique = false)
-        private String username;
+    @Column(name = "address")
+    private String address;
 
-        @Column(name = "phone_number")
-        private String phoneNumber;
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
-        @Column(name = "address")
-        private String address;
+    @Column(name = "deleted_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deletedAt;
 
-        @Column(name = "telegram_id")
-        private String telegramId;
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 
-        @Column(name = "telegram_username")
-        private String telegramUsername;
+    @Column(name = "profile_picture", nullable = false)
+    private String profilePicture;
 
-        @Column(name = "profile_picture",nullable = false)
-        private String profilePicture; // Optional field for customer profile picture
+    @Column(name = "telegram_id")
+    private String telegramId;
 
-        @Column(name = "created_at")
-        @Temporal(TemporalType.TIMESTAMP)
-        private Date createdAt;
+    @Column(name = "telegram_username")
+    private String telegramUsername;
 
-        @Column(name = "updated_at")
-        @Temporal(TemporalType.TIMESTAMP)
-        private Date updatedAt;
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
-        @Column(name = "deleted_at")
-        @Temporal(TemporalType.TIMESTAMP)
-        private Date deletedAt;
-
-        @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private List<Order> orders;
-    }
+    @Column(name = "username")
+    private String username;
+}

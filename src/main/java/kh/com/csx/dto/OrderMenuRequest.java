@@ -1,5 +1,6 @@
 package kh.com.csx.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -12,7 +13,14 @@ import java.math.BigDecimal;
 @Setter
 public class OrderMenuRequest {
     private Long menuId;
+
+    @JsonProperty("menu_name")
     private String menuName;
+
+    @JsonProperty("quantity")
     private Integer quantity;
-    private BigDecimal priceAtOrder;
+
+    @JsonProperty("order_id")
+    private Long orderId;
+
 }
