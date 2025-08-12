@@ -28,6 +28,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
+    @Column(name = "customer_name")
+    private String customerName;
+
     @Column(name = "customer_phone")
     private String customerPhone;
 
@@ -48,4 +51,5 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderMenu> orderMenus;
+
 }

@@ -32,6 +32,7 @@ package kh.com.csx.service.impl;
                     .orElseThrow(() -> new RuntimeException("Customer not found"));
             Order order = new Order();
             order.setCustomer(customer);
+            order.setCustomerName(customer.getUsername());
             order.setCustomerAddress(customer.getAddress());
             order.setCustomerPhone(customer.getPhoneNumber());
             order.setCreatedAt(new Date());

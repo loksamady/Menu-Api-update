@@ -22,7 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
     private final ModelMapper modelMapper;
     @Override
     public CustomerRequest create(CustomerRequest customerRequest) {
-        Customer customer = modelMapper.map(customerRequest,Customer.class);
+        Customer customer = modelMapper.map(customerRequest, Customer.class);
+        if (customerRequest.getProfilePicture() == null) {
+            customer.setProfilePicture(""); // or a default image URL
+        } else {
+            customer.setProfilePicture(customerRequest.getProfilePicture());
+        }
         customer.setCreatedAt(new Date());
         customerRepository.save(customer);
         return customerRequest;
