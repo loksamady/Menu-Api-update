@@ -1,7 +1,6 @@
 package kh.com.csx.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,6 +11,10 @@ import java.util.Date;
 @Setter
 @ToString
 public class CustomerRequest {
+    @JsonProperty("id")
+    private Long id;
+
+    @JsonProperty("username")
     private String username; // Unique name for the customer
     @JsonProperty("phone_number")
     private String phoneNumber;

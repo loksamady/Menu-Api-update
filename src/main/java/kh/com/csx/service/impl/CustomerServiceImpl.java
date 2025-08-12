@@ -29,15 +29,17 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setProfilePicture(customerRequest.getProfilePicture());
         }
         customer.setCreatedAt(new Date());
-        customerRepository.save(customer);
-        return customerRequest;
+        Customer newCustomer = customerRepository.save(customer);
+        CustomerRequest response = modelMapper.map(newCustomer, CustomerRequest.class);
+        response.setId(newCustomer.getId()); // Ensure id is set in response
+        return response;
     }
 
     @Override
-    public CustomerResponse update(CustomerRequest customerRequest, String phoneNumber) {
-        Optional<Customer> customer = customerRepository.findByPhoneNumber(phoneNumber);
+    public CustomerResponse update(CustomerRequest customerRequest, Long id) {
+        Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isEmpty()) {
-            log.error("Customer phoneNumber {} not found", phoneNumber);
+            log.error("Customer Id {} not found", id);
             return new CustomerResponse();
         }
         Customer customerToUpdate = customer.get();
@@ -90,12 +92,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerResponse findByPhoneNumber(String phoneNumber) {
+    public CustomerResponse findById(Long id) {
         CustomerResponse customerResponse = new CustomerResponse();
 
-        Optional<Customer> customer = customerRepository.findByPhoneNumber(phoneNumber);
+        Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isEmpty()) {
-            log.error("Customer with phone number {} not found", phoneNumber);
+            log.error("Customer with phone number {} not found", id);
             return customerResponse;
         } else {
             Customer foundCustomer = customer.get();

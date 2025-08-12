@@ -1,5 +1,6 @@
 package kh.com.csx.controller.website;
 
+import jakarta.persistence.Id;
 import kh.com.csx.dto.CustomerRequest;
 import kh.com.csx.dto.CustomerResponse;
 import kh.com.csx.service.CustomerService;
@@ -30,20 +31,12 @@ public class CustomerController {
         return ResponseEntity.ok(createdCustomer);
     }
 
-    @PutMapping("api/v1/website/customers/{PhoneNumber}")
-    public ResponseEntity<Object> updateCustomerByPhoneNumber(@RequestBody CustomerRequest customerRequest, @PathVariable String PhoneNumber) {
-        log.info("Updating customer with phone number: {} and request: {}", PhoneNumber, customerRequest);
-        CustomerResponse updatedCustomer = customerService.update(customerRequest, PhoneNumber);
-        if (updatedCustomer == null) {
-            return ResponseEntity.ok(Map.of("success", false, "message", "Customer not found"));
-        }
-        return ResponseEntity.ok(updatedCustomer);
+    @PutMapping("api/v1/website/customers/{id}")
+    public ResponseEntity<Object> updateCustomer(@RequestBody CustomerRequest customerRequest, @PathVariable String id) {
+        log.info("Updating customer with id: {} and request: {}", id, customerRequest);
+        customerService.update(customerRequest, Long.parseLong(id));
+        return ResponseEntity.ok().build();
     }
-//    public ResponseEntity<Object> updateCustomer(@RequestBody CustomerRequest customerRequest, @PathVariable String id) {
-//        log.info("Updating customer with id: {} and request: {}", id, customerRequest);
-//        customerService.update(customerRequest, Long.parseLong(id));
-//        return ResponseEntity.ok().build();
-//    }
 
     @DeleteMapping("api/v1/website/customers/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable String id) {
@@ -53,22 +46,14 @@ public class CustomerController {
     }
 
     @GetMapping("api/v1/website/customers/{id}")
-    public ResponseEntity<CustomerResponse> getCustomerByPhoneNumber(@PathVariable String id) {
-        log.info("Fetching customer with phone number: {}", id);
-        CustomerResponse customerResponse = customerService.findByPhoneNumber(id);
+    public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable String id) {
+        log.info("Fetching customer with id: {}", id);
+        CustomerResponse customerResponse = customerService.findById(Long.parseLong(id));
         if (customerResponse == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(customerResponse);
     }
-//    public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable String id) {
-//        log.info("Fetching customer with id: {}", id);
-//        CustomerResponse customerResponse = customerService.findById(Long.parseLong(id));
-//        if (customerResponse == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(customerResponse);
-//    }
     @GetMapping("api/v1/website/customers")
     public ResponseEntity<List<CustomerResponse>> getAllCustomers() {
         log.info("Fetching all customers");
