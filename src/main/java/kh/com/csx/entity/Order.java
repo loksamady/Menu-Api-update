@@ -24,9 +24,9 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @Column(name = "payment_status")
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
+//    @Column(name = "payment_status")
+//    @Enumerated(EnumType.STRING)
+//    private PaymentStatus paymentStatus;
 
     @Column(name = "customer_name")
     private String customerName;
@@ -34,8 +34,8 @@ public class Order {
     @Column(name = "customer_phone")
     private String customerPhone;
 
-    @Column(name = "customer_address")
-    private String customerAddress;
+//    @Column(name = "customer_address")
+//    private String customerAddress;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)

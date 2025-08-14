@@ -33,7 +33,7 @@ package kh.com.csx.service.impl;
             Order order = new Order();
             order.setCustomer(customer);
             order.setCustomerName(customer.getUsername());
-            order.setCustomerAddress(customer.getAddress());
+//            order.setCustomerAddress(customer.getAddress());
             order.setCustomerPhone(customer.getPhoneNumber());
             order.setCreatedAt(new Date());
 
@@ -45,6 +45,7 @@ package kh.com.csx.service.impl;
                 OrderMenu orderMenu = new OrderMenu();
                 orderMenu.setOrder(order);
                 orderMenu.setMenu(menu);
+                orderMenu.setMenuName(menu.getNameEn());
                 orderMenu.setQuantity(orderMenuRequest.getQuantity().intValue()); // Convert BigDecimal to int
                 orderMenu.setPrice(BigDecimal.valueOf(menu.getPrice())); // Convert double to BigDecimal
                 orderMenu.setDiscount(BigDecimal.valueOf(menu.getDiscount())); // Assuming Menu has a discount field
