@@ -1,6 +1,7 @@
 package kh.com.csx.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,11 +15,13 @@ public class CustomerRequest {
     @JsonProperty("id")
     private Long id;
 
+    @NotNull(message = "username can't be empty!")
     @JsonProperty("username")
     private String username; // Unique name for the customer
+
+    @NotNull(message = "phone_number can't be empty!")
     @JsonProperty("phone_number")
     private String phoneNumber;
-    private String address;
 
     @JsonProperty("telegram_id")
     private String telegramId; // Telegram ID for customer communication

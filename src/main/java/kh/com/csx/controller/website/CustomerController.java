@@ -1,6 +1,7 @@
 package kh.com.csx.controller.website;
 
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import kh.com.csx.dto.CustomerRequest;
 import kh.com.csx.dto.CustomerResponse;
 import kh.com.csx.service.CustomerService;
@@ -21,7 +22,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("api/v1/website/customers")
-    public ResponseEntity<?> create(@RequestBody CustomerRequest customerRequest){
+    public ResponseEntity<?> create(@RequestBody @Valid CustomerRequest customerRequest){
         log.info("Creating customer with request: {}", customerRequest);
         CustomerRequest createdCustomer = customerService.create(customerRequest);
         if (createdCustomer == null) {

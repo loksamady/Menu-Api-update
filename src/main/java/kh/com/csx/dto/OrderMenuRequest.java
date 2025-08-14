@@ -1,6 +1,7 @@
 package kh.com.csx.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class OrderMenuRequest {
+
+    @NotNull(message = "Menu ID is required")
     private Integer menuId;
 
     @JsonProperty("menu_name")
